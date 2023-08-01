@@ -1,0 +1,76 @@
+/* error page css  */
+#error-page {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#error-page .error-content {
+    z-index: 1;
+}
+
+#error-page h3 {
+    font-size: 250px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -9999999;
+    opacity: 0.03;
+    text-align: center;
+}
+
+/* carousal csss  */
+#carouselExampleDark {
+    height: 500px;
+}
+
+#carouselExampleDark .carousel-caption {
+    z-index: 10;
+}
+
+#carouselExampleDark .carousel-inner {
+    height: 100%;
+    width: 100%;
+}
+
+#carouselExampleDark img {
+    max-height: 100%;
+    max-width: 100%;
+
+}
+
+/* manage page */
+
+/* scroll bar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #222222;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #00bc8c;
+    
+}
+
+
+/* scroll bar */
+
+
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+#product_manage {
+    max-height: 90vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
