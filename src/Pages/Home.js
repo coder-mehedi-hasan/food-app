@@ -18,7 +18,6 @@ const Home = () => {
         const data = await response.json()
         setfoods(data[0])
         setfoodsCat(data[1])
-        console.log(data)
     }
 
     useEffect(() => {

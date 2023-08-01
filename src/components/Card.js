@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useCart, useDispatchCart } from '../reducer/ContextReducer'
 import ApiUrl from '../Local/ApiUrl';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Card = (props) => {
     const navigate = useNavigate()
@@ -50,7 +50,7 @@ const Card = (props) => {
                         : ''
                 }
                 <div className="card-body">
-                    <h5 className="card-title">{name}</h5>
+                    <h5 className="card-title"><Link to={`/product/details/${_id}`} className='text-decoration-none text-white'>{name}</Link></h5>
                     <p className="card-text">{description}</p>
                     <div className="p-0 w-100">
                         <select className="m-1 p-1 bg-success rounded" id="quantity-pcs"

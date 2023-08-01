@@ -1,13 +1,24 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Card from '../components/Card';
 
 const ProductDetails = () => {
     const product = useLoaderData()
-    const option = Object.keys(product.options[0])
     const options = product.options[0]
     console.log(options)
     return (
         <>
+
+            <div className='row'>
+                <div className="col-lg-6">
+
+                    <Card foodItem={product}
+                        options={options}></Card>
+
+                </div>
+            </div>
+
+            {/*
             <div className="container mt-4">
                 <div className="row border p-4 ">
                     <div className="col-lg-6 mb-2 p-0 border border-white rounded overflow-hidden">
@@ -62,7 +73,7 @@ const ProductDetails = () => {
                         <p className='m-0 fw-medium text-success'>{product.description}</p>
                     </div>
                 </div>
-            </div>
+            </div>*/}
         </>
     );
 };

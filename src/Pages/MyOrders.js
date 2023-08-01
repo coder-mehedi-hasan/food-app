@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 
 
 const MyOrders = () => {
+    const [search, setsearch] = useState('')
+    const [filterOption, setfilterOption] = useState('all')
     const [myorder, setmyorder] = useState()
     const [allOrder, setAllOrder] = useState()
     const loadData = async () => {
@@ -27,8 +29,6 @@ const MyOrders = () => {
             setmyorder(data.myorder.orders)
         }
     }
-    console.log(myorder)
-    console.log(allOrder)
     useEffect(() => {
         loadData()
     }, [])
@@ -96,8 +96,8 @@ const MyOrders = () => {
 
                                                             :
                                                             <div>
-                                                                <p className='text-center m-0 fs-3'>
-                                                                    <i className="fa-solid fa-spinner"></i>
+                                                                <p className='text-center m-0'>
+                                                                    <div class="spinner-border ms-auto" aria-hidden="true"></div>
                                                                 </p>
                                                                 <p className='m-0 fw-semibold text-center'>{item.position}</p>
                                                             </div>
@@ -111,13 +111,42 @@ const MyOrders = () => {
                             })
                             :
                             allOrder ?
-                                allOrder.map((data) => {
-                                    return (
-                                        <>
-                                            <EditAllProduct data={data} key={data._id} />
-                                        </>
-                                    )
-                                })
+                                <>
+                                    <div className='row my-3'>
+                                        <div className="col-8">
+                                            <input type="text" className='form-control' placeholder='Search order by id/email' onChange={(e) => setsearch(e.target.value)} />
+                                        </div>
+                                        <div className="col-4">
+                                            <select class="form-select" aria-label="Default select example"
+                                                onChange={(e) => setfilterOption(e.target.value)}
+                                            >
+                                                <option value='all'>All</option>
+                                                <option value="processing">Processing</option>
+                                                <option value="shipping">Shipping</option>
+                                                <option value="delivired">Delivired</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    {
+                                        allOrder.map((data, index) => {
+                                            return (
+                                                <>
+                                                    {
+                                                        filterOption === 'all' ?
+                                                            data.orders.filter(item => (item.date < Date.now) && (data.email.toLowerCase().includes(search.toLowerCase()))).map((order) => {
+                                                                return (
+                                                                    <EditAllProduct key={order._id} orders={order} info={data.email} />)
+                                                            }) : data.orders.filter(item => (item.position === filterOption) && (item.date < Date.now) && (data.email.toLowerCase().includes(search.toLowerCase()))).map((order) => {
+                                                                return (
+                                                                    <EditAllProduct key={order._id} orders={order} info={data.email} />)
+                                                            })
+                                                    }
+                                                </>
+                                            )
+                                        })
+                                    }
+                                </>
+
 
                                 : <div className='my-3'>
                                     <h3 className='text-center text-capitalize text-white'>Your have no order</h3>
