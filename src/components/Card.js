@@ -38,17 +38,34 @@ const Card = (props) => {
     return (
         <>
             <div className="card my-3 mx-2">
-                {
-                    images ?
-                        images.map((url,index) => {
-                            return (
-                                <>
-                                    <img key={index} src={url} className="card-img-top" style={{ height: '180px', objectFit: 'fill' }} alt="food" />
-                                </>
-                            )
-                        })
-                        : ''
-                }
+                <div id="carouselExampleFade" className="carousel slide carousel-fade">
+                    <div className="carousel-inner">
+                        {
+                            images.map((src) => {
+                                return (
+                                    <>
+                                        <div className="carousel-item active me-0">
+                                            <img src={src} className="d-block w-100 img-fluid" alt="carousal" />
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
+                    {
+                        images.length > 1 ?
+                            <>
+                                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Previous</span>
+                                </button>
+                                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span className="visually-hidden">Next</span>
+                                </button>
+                            </> : ''
+                    }
+                </div>
                 <div className="card-body">
                     <h5 className="card-title"><Link to={`/product/details/${_id}`} className='text-decoration-none text-white'>{name}</Link></h5>
                     <p className="card-text">{description}</p>

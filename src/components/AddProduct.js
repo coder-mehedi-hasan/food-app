@@ -30,7 +30,7 @@ const AddProduct = ({ category }) => {
             alert('Adding Product Failed')
         } else {
             alert('Adding Product Done')
-            setprice({ size: '', price: '' })
+            window.location.reload()
         }
     }
 
@@ -80,7 +80,7 @@ const AddProduct = ({ category }) => {
                         <select className="form-select" id="floatingSelect" aria-label="Floating label select example" onChange={handleChange} name='categoryName'>
                             <option value=''></option>
                             {
-                                category.map((item, index) => <option key={index} value={item.CategoryName}>{item.CategoryName}</option>)
+                                category.map((item, index) => <option key={index} value={item.categoryName}>{item.categoryName}</option>)
                             }
                         </select>
                         <label htmlFor="floatingSelect">Item Category</label>

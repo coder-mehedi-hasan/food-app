@@ -12,6 +12,9 @@ import ProductManage from './Pages/ProductManage';
 import ProductDetails from './Pages/ProductDetails';
 import ApiUrl from './Local/ApiUrl';
 import Cookies from 'js-cookie';
+import Category from './Pages/Category';
+import UsersList from './Pages/UsersList';
+import Profile from './Pages/Profile';
 
 function App() {
   const router = createBrowserRouter([
@@ -41,6 +44,18 @@ function App() {
         {
           path: '/manage/product',
           element: (<ProductManage></ProductManage>)
+        },
+        {
+          path: '/manage/category',
+          element: (<Category></Category>)
+        },
+        {
+          path: '/list/users',
+          element: (<UsersList />)
+        },
+        {
+          path: '/profile',
+          element: (<Profile />)
         },
         {
           path: '/product/details/:id',

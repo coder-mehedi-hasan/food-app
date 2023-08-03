@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import Footer from '../components/Footer';
 import ApiUrl from '../Local/ApiUrl';
+import Cookies from 'js-cookie';
 
 const Home = () => {
     const [search, setsearch] = useState('')
@@ -11,17 +12,31 @@ const Home = () => {
         const response = await fetch(`${ApiUrl}/api/foods`, {
             method: "GET",
             headers: {
-                Accept:"application/json",
+                Accept: "application/json",
                 'Content-Type': 'application/json'
             }
         })
         const data = await response.json()
-        setfoods(data[0])
-        setfoodsCat(data[1])
+        if(response.status === 200){
+            setfoods(data)
+        }
     }
+    const loadCategory = async () => {
+        const res = await fetch(`${ApiUrl}/food/category`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        const data = await res.json()
+        if (res.status === 200) {
+            setfoodsCat(data)
+        }
 
+    }
     useEffect(() => {
         loadData()
+        loadCategory()
     }, [])
 
     return (
@@ -63,11 +78,11 @@ const Home = () => {
                             return (
                                 <div key={data._id}>
                                     <div className='row'>
-                                        <h3 className='fs-2 fw-medium'>Food Category <i className="fa-solid fa-caret-right"></i> {data.CategoryName} </h3>
+                                        <h3 className='fs-2 fw-medium'>Food Category <i className="fa-solid fa-caret-right"></i> {data.categoryName} </h3>
                                         <hr />
                                         {
                                             foods !== [] ?
-                                                foods.filter(items => (items.categoryName === data.CategoryName) &&
+                                                foods.filter(items => (items.categoryName === data.categoryName) &&
                                                     (items.name.toLowerCase().includes(search.toLowerCase()))
                                                 ).map(filterItems => {
                                                     return (

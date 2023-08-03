@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MyCart = () => {
     const [cart, setCart] = useState([])
+    const [shipping, setShipping] = useState('')
     const navigate = useNavigate()
     const loadUser = async () => {
         const res = await fetch(`${ApiUrl}/user`, {
@@ -37,7 +38,7 @@ const MyCart = () => {
         )
     }
 
-    let totalPrice = cart.reduce((total, food) => total + food.price, 0)
+    let totalPrice = cart.reduce((total, food) => parseInt(total) + parseInt(food.price), 0)
     const handleCheckOut = async () => {
         const response = await fetch(`${ApiUrl}/orderData`, {
             method: 'POST',
@@ -47,7 +48,9 @@ const MyCart = () => {
             },
             body: JSON.stringify({
                 data: cart,
-                date: new Date().toDateString()
+                date: new Date().toDateString(),
+                totalPrice:totalPrice,
+                shipping:shipping
             })
 
         })
@@ -86,8 +89,14 @@ const MyCart = () => {
                 <div>
                     <h3>Total Price {totalPrice ? totalPrice : 0} TK</h3>
                 </div>
-                <div>
-                    <button className='btn bg-success mt-5' onClick={handleCheckOut} >Check Out</button>
+                <div className='py-2'>
+                    <form onSubmit={handleCheckOut}>
+                        <div className="form-floating">
+                            <textarea className="form-control" required placeholder="Must Have Shipping Address" value={shipping} id="floatingTextarea" onChange={(e)=>setShipping(e.target.value)}></textarea>
+                            <label htmlFor="floatingTextarea">Shipping Place</label>
+                        </div>
+                        <button type='submit' className='btn bg-success mt-5' >Check Out</button>
+                    </form>
                 </div>
             </div>
         </>

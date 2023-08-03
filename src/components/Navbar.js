@@ -28,10 +28,9 @@ const Navbar = () => {
                                 {
                                     (localStorage.getItem('foodapp')) && Cookies.get('foodapp') ? <NavLink className="nav-link" aria-current="page" to="/myorder">{Cookies.get('role') === 'admin' || Cookies.get('role') === 'officer' ?
                                         <>All Order</>
-
-                                        : 
+                                        :
                                         <>My Orders</>
-                                        }</NavLink>
+                                    }</NavLink>
                                         : ''
                                 }
                             </li>
@@ -44,26 +43,27 @@ const Navbar = () => {
                                 </div>
                                 :
                                 <>
-                                    <>
-                                        <div className="btn-group">
-                                            {
-                                                (Cookies.get('role') === "admin" || Cookies.get("role") === "officer") ?
-                                                    <>
-                                                        <button type="button" className="btn bg-white fw-normal mx-2 text-success text-capitalize dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <span className="visually-hidden"></span>
-                                                            Manage
-                                                            <i className="fa-solid fa-gear ms-1"></i>
-                                                        </button>
-                                                        <ul className="dropdown-menu bg-success">
-                                                            <li><Link className="dropdown-item text-white" to='/manage/product' >Product Manage</Link></li>
-                                                        </ul>
-                                                    </>
-                                                    : ''
-                                            }
-                                            <Link className="btn bg-white fw-normal mx-2 text-success text-capitalize" to='/mycart'>My Cart</Link>
-                                            <Link className="btn bg-white fw-normal mx-2 text-success text-capitalize" onClick={handleLogout}>Log Out</Link>
-                                        </div>
-                                    </>
+                                    <div className="btn-group">
+                                        {
+                                            (Cookies.get('role') === "admin" || Cookies.get("role") === "officer") ?
+                                                <>
+                                                    <Link className='btn bg-white fw-normal mx-2 text-success text-capitalize' to='/list/users'>Users</Link>
+                                                    <button type="button" className="btn bg-white fw-normal mx-2 text-success text-capitalize dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <span className="visually-hidden"></span>
+                                                        Manage
+                                                        <i className="fa-solid fa-gear ms-1"></i>
+                                                    </button>
+                                                    <ul className="dropdown-menu bg-success">
+                                                        <li><Link className="dropdown-item text-white" to='/manage/product' >Product Manage</Link></li>
+                                                        <li><Link className="dropdown-item text-white" to='/manage/category' >Category Manage</Link></li>
+                                                    </ul>
+                                                </>
+                                                : ''
+                                        }
+                                        <Link className="btn bg-white fw-normal mx-2 text-success text-capitalize" to='/mycart'>My Cart</Link>
+                                        <Link className="btn bg-white fw-normal mx-2 text-success text-capitalize" to='/profile'>Profile</Link>
+                                        <Link className="btn bg-white fw-normal mx-2 text-success text-capitalize" onClick={handleLogout}>Log Out</Link>
+                                    </div>
                                 </>
                         }
 

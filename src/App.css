@@ -74,3 +74,17 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
+
+/* print  */
+#printRec{
+    background: #fff !important;
+}
+#printRec p{
+    font-size: 9px !important;
+    color: #000 !important;
+}
+#printRec h4{
+    font-size: 11px !important;
+    color: #000 !important;
+}
