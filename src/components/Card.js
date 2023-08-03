@@ -29,6 +29,8 @@ const Card = (props) => {
         })
         if (res.status === 201) {
             navigate('/')
+        }else{
+            navigate('/login')
         }
     }
 
